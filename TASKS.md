@@ -15,11 +15,11 @@ All new code lives in `apps-script/`. The Vite/React scaffold in the repo root i
 
 ## Phase 0: Sheet + project setup (DO FIRST)
 - [x] T-001 Initialize project repository (Git) — remote `origin` set; push pending (you)
-- [~] T-005 Project structure — `apps-script/` created (Code.gs, Seed.gs done; index.html pending)
+- [~] T-005 Project structure — `apps-script/Code.gs` (setup + seed in one file); `index.html` pending; `Seed.gs` obsolete (delete it)
 - [ ] T-010 Create Google Sheet *(changed: `Reference` + single `Log` tab, not 5 workout tabs)* — **you**
-- [~] T-011 Populate Reference with all exercise data — `Seed.gs` written; **you run `seedReference()`**
-- [~] T-012 Add headers to log sheet — `setup()` written; **you run `setup()` first**
-- [ ] N-001 Paste `Code.gs`, `Seed.gs` into Apps Script, run `setup()` then `seedReference()`, check Reference tab — **you**
+- [~] T-011 Populate Reference with all exercise data — in `Code.gs`; **you run `setupAndSeed()`**
+- [~] T-012 Add headers to log sheet — `setup()` in `Code.gs`
+- [ ] N-001 Replace the whole default `Code.gs` in Apps Script with `apps-script/Code.gs` (no wrapper), run `setupAndSeed()`, check Reference tab (82 rows) — **you**
 - [-] T-002 Scaffold React + TS with Vite — not used
 - [-] T-003 Living Design — not used (policy question moot)
 - [-] T-004 ESLint + Prettier — not used
@@ -42,29 +42,29 @@ All new code lives in `apps-script/`. The Vite/React scaffold in the repo root i
 - [-] T-023 Handle auth errors — merged into T-042 (red sync state)
 
 ## Phase 3: Sheets service layer (server, `Code.gs`)
-- [ ] T-025 Sheets service module (read/write abstraction)
-- [ ] T-026 `getData`: read Reference
-- [ ] T-027 `logSets`: append rows
-- [ ] T-028 `getData`: last session data per exercise (excludes today)
-- [ ] T-029 Batch write (flush multiple queued sets)
+- [x] T-025 Sheets service module (read/write abstraction) — `sheet_`, `getData`, `logSets`, `deleteSet`, `doGet` in Code.gs
+- [x] T-026 `getData`: read Reference
+- [x] T-027 `logSets`: append rows
+- [x] T-028 `getData`: last session data per exercise (excludes today)
+- [x] T-029 Batch write (flush multiple queued sets)
 - [ ] T-030 Error handling + retry (client side)
-- [ ] T-031 Test read/write with the actual Sheet
-- [ ] N-002 Server dedupe by `SetId` + script lock (retries never duplicate)
-- [ ] N-003 `deleteSet(setId)` for undo
-- [ ] N-004 Recover Date-parsed cells (if Sheets turns "8-10" into a date)
+- [x] T-031 Test read/write with the actual Sheet — `testServer()` run by you
+- [x] N-002 Server dedupe by `SetId` + script lock (retries never duplicate)
+- [x] N-003 `deleteSet(setId)` for undo
+- [x] N-004 Recover Date-parsed cells (if Sheets turns "8-10" into a date)
 
 ## Phase 4: Local storage (was IndexedDB)
-- [ ] T-033 Define localStorage schema (queue, cached reference, sessions, settings) *(changed from Dexie tables)*
+- [~] T-033 Define localStorage schema (queue, cached reference, sessions) *(changed from Dexie tables)* — in index.html, awaiting device test
 - [ ] T-034 "Save set locally" (always first)
 - [ ] T-035 Sync queue (pending sets)
 - [ ] T-036 Flush queue to Sheet
-- [ ] T-037 Cache Reference data locally
-- [ ] T-038 Cache refresh (refresh on every launch)
-- [ ] T-038a Show cached instantly, refresh in background
-- [ ] T-038b Manual refresh *(changed: Home refresh button; pull gesture not native in standalone)*
+- [~] T-037 Cache Reference data locally — awaiting device test
+- [~] T-038 Cache refresh (refresh on every launch) — awaiting device test
+- [~] T-038a Show cached instantly, refresh in background — awaiting device test
+- [~] T-038b Manual refresh *(changed: Home refresh button; pull gesture not native in standalone)* — awaiting device test
 - [ ] T-038c "Refresh Exercise Data" button in Settings
-- [ ] T-038e Mid-workout isolation (cache updates, current session unchanged)
-- [ ] T-038f Stale cache banner (>7 days)
+- [~] T-038e Mid-workout isolation (cache updates, current session unchanged) — awaiting device test
+- [~] T-038f Stale cache banner (>7 days) — awaiting device test
 - [-] T-032 Install/configure Dexie.js — localStorage instead
 - [-] T-038d Cache-age auto refresh — merged into T-038 (refresh every launch)
 
@@ -77,25 +77,25 @@ All new code lives in `apps-script/`. The Vite/React scaffold in the repo root i
 - [ ] T-044 Test offline → online transition
 
 ## Phase 6: UI — Home screen
-- [ ] T-045 Home layout (5 workout cards)
-- [ ] T-046 Design workout cards
-- [ ] T-047 Muscle group labels
-- [ ] T-048 Sync status indicator on home
-- [ ] T-049 Navigation Home → Section selection
+- [~] T-045 Home layout (5 workout cards) — awaiting device test
+- [~] T-046 Design workout cards
+- [~] T-047 Muscle group labels
+- [~] T-048 Sync status indicator on home (shows "Synced"/"N queued"; real sync later)
+- [~] T-049 Navigation Home → Section selection
 
 ## Phase 7: UI — Section selection
-- [ ] T-050 Layout (Warm-Up, Workout, Cooldown)
-- [ ] T-051 Exercise count per section (from cached Reference)
-- [ ] T-052 Section completion status
-- [ ] T-053 Back navigation to Home
-- [ ] T-054 Navigation Section → Exercise list
+- [~] T-050 Layout (Warm-Up, Workout, Cooldown)
+- [~] T-051 Exercise count per section (from cached Reference)
+- [~] T-052 Section completion status
+- [~] T-053 Back navigation to Home
+- [~] T-054 Navigation Section → Exercise list (placeholder list for now)
 
 ## Phase 8: UI — Warm-Up & Cooldown
-- [ ] T-055 Checklist layout
-- [ ] T-056 Name, duration/reps, notes
-- [ ] T-057 Tap-to-complete
-- [ ] T-058 "All Done" button
-- [ ] T-059 Persist checklist state for current session
+- [~] T-055 Checklist layout
+- [~] T-056 Name, duration/reps, notes
+- [~] T-057 Tap-to-complete
+- [~] T-058 "All Done" button
+- [~] T-059 Persist checklist state for current session
 
 ## Phase 9: UI — Workout exercise list
 - [ ] T-060 Scrollable exercise cards
@@ -176,6 +176,19 @@ All new code lives in `apps-script/`. The Vite/React scaffold in the repo root i
 - [ ] B-005 Edit (not just undo) of logged sets
 - [ ] B-006 Skip/swap exercise; extra sets
 - [ ] B-007 Pull-to-refresh gesture
+
+## v2 changes (latest iteration)
+- [x] V2-1 Reference tab restructured: `WORKOUT` / `SECTION` bands, exercise rows under them (easy to edit); parsed generically
+- [x] V2-2 Colours: Home cards cycle through a palette; sections green (warm-up) / yellow (workout) / blue (cooldown); list cards alternate shades
+- [x] V2-3 One log tab per workout (`Timestamp | Date | Exercise | Set | Weight | Reps | SetId | Notes`), auto-created
+- [x] V2-4 "Last workout" reference box on exercise cards (latest previous session of that workout tab only; hidden when none)
+- [x] V2-5 No hard-coded workouts/sections/muscles: UI and log tabs follow the Reference tab; problems shown as warnings
+- [x] V2-6 Tested: server logic against a fake Sheet (35 checks) + client/server integration in jsdom (32 checks), incl. boot with old v1 phone storage
+- [x] V2-8 Section cards: bullet icons removed (card colour is the cue)
+- [x] V2-9 Exercise/checklist cards use the Home palette colours (no two-shade pairs)
+- [x] V2-10 Body Weight card on Home (separate, dashed) -> `Weight` tab, today's date, offline queue, undo, recent list with deltas; `METRICS` list ready for arm/chest/waist
+- [x] V2-11 Finish Workout button only on the Sections page and only when warm-up, workout and cooldown are all complete (removed from Exercises page); Home card shows `Completed today ✓` after finishing (back to `In progress` if you undo a set)
+- [ ] V2-7 Verify on real Sheet + iPhone (you)
 
 ## Verify on device
 - Home-screen icon stays signed in with "Only myself" (else deploy as "Anyone" + secret param)
